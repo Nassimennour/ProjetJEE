@@ -3,12 +3,18 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class App {
-    public static void main(String[] args) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        // Your code here...
-        session.getTransaction().commit();
-        session.close();
+    private static SessionFactory sessionFactory;
+
+    public static void init() {
+        if (sessionFactory == null) {
+            sessionFactory = new Configuration().configure().buildSessionFactory();
+        }
+    }
+
+    public static Session getSession() {
+        if (sessionFactory == null) {
+            init();
+        }
+        return sessionFactory.openSession();
     }
 }

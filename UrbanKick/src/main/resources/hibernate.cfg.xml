@@ -8,11 +8,13 @@
         <property name="hibernate.connection.username">urbankick</property>
         <property name="hibernate.connection.password">password123</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
         <mapping class="Entity.Utilisateur"/>
         <mapping class="Entity.Match"/>
+        <mapping class="Entity.Organisateur"/>
+        <mapping class="Entity.Adresse"/>
         <!-- Add other class mappings here -->
     </session-factory>
 </hibernate-configuration>

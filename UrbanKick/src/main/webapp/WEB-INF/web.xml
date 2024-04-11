@@ -4,15 +4,9 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <listener>
+    <listener-class>AppInitializer</listener-class>
+  </listener>
 
-  <servlet>
-    <servlet-name>DatabaseServlet</servlet-name>
-    <servlet-class>DatabaseServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>DatabaseServlet</servlet-name>
-    <url-pattern>/database</url-pattern>
-  </servlet-mapping>
 
 </web-app>
