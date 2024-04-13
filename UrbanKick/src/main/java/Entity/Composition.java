@@ -1,6 +1,8 @@
 package Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -8,7 +10,6 @@ import java.util.List;
 public class Composition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "composition_id")
     private long id;
     @ManyToOne
     @JoinColumn(name = "match_id")
@@ -16,12 +17,15 @@ public class Composition {
     @ManyToOne
     @JoinColumn(name = "equipe_id")
     private Equipe equipe;
+    @Pattern(regexp = "\\d-(\\d-)*\\d", message = "formation non valide, veuillez entrer une formation valide")
+    private String formation;
     @ManyToMany
     @JoinTable(
         name = "composition_joueurs",
         joinColumns = @JoinColumn(name = "composition_id"),
         inverseJoinColumns = @JoinColumn(name = "joueur_id")
     )
+    @Size(max=11, message="La composition ne doit pas dépasser 11 joueurs titulaires")
     private List<Joueur> joueursTitulaires;
     @ManyToMany
     @JoinTable(
@@ -31,9 +35,6 @@ public class Composition {
     )
     private List<Joueur> joueursRemplacants;
     @ManyToOne
-    private Joueur capitaineDomicile;
-    @ManyToOne
-    private Joueur capitaineExterieur;
-
+    private Joueur capitaine;
 
 }

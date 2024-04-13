@@ -1,6 +1,8 @@
 package Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import java.util.List;
 public class Joueur extends Utilisateur {
     @Enumerated(EnumType.STRING)
     private Position poste;
+    @Min(0) @Max(99)
     @Column(name = "numero_maillot")
     private int numero;
     @ManyToOne
@@ -16,10 +19,15 @@ public class Joueur extends Utilisateur {
     private Equipe equipe;
     @OneToMany(mappedBy = "hommeDuMatch")
     private List<Match> matchesAsHommeDuMatch;
-    @OneToMany(mappedBy = "capitaineExterieur")
-    private List<Match> matchesasCapitaineDomicile;
-    @OneToMany(mappedBy = "capitaineDomicile")
-    private List<Match> matchesAsCapitaineExterieur;
+    @OneToMany(mappedBy = "joueur", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StatJoueur> stats;
+    @OneToMany(mappedBy = "joueur", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Commentaire> commentaires;
+    @OneToMany(mappedBy = "buteur")
+    private List<Ligue> liguesAsButeur;
+    @OneToMany(mappedBy = "meilleurJoueur")
+    private List<Ligue> liguesAsMeilleurJoueur;
+
 
 
 }

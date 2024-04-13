@@ -8,9 +8,9 @@ import java.util.List;
 public class RègleDiscip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "regle_id")
     private long id;
     private String description;
+    @Enumerated(EnumType.STRING)
     private TypeSanction typeSanction;
     private double montantAmende;
     private int nbreMatchSuspension;

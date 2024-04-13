@@ -9,9 +9,6 @@ public class Organisateur extends Utilisateur {
     @Column(name="organisation")
     private String organisationName;
     private int experience;
-
-    @ElementCollection
-    @CollectionTable(name = "organisateur_certifications", joinColumns = @JoinColumn(name = "organisateur_id"))
-    @Column(name = "certification")
-    private List<String> certifications;
+    @OneToMany(mappedBy = "organisateur")
+    private List<Ligue> ligues;
 }

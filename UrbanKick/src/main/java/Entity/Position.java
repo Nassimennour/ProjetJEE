@@ -8,6 +8,8 @@ public enum Position {
     CDM,
     CM,
     CAM,
+    LM,
+    RM,
     RW,
     LW,
     ST
