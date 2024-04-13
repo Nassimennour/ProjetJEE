@@ -1,9 +1,16 @@
 package Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="StatsJoueurs")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class StatJoueur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

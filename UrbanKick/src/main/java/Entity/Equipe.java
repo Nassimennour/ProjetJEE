@@ -1,5 +1,9 @@
 package Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
@@ -11,6 +15,9 @@ import java.util.Map;
 
 @Entity
 @Table(name="Equipes")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Equipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

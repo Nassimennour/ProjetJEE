@@ -1,9 +1,16 @@
 package Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="FaitsdeMatchs")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class FaitdeMatch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

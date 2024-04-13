@@ -1,9 +1,16 @@
 package Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="Penalties")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Penalty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

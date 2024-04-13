@@ -1,9 +1,16 @@
 package Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="Pronostics")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pronostic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

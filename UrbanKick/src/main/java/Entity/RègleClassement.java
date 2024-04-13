@@ -1,11 +1,17 @@
 package Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.bytebuddy.implementation.bind.annotation.Default;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="RèglesClassement")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RègleClassement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

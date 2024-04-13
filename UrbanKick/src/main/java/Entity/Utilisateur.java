@@ -1,6 +1,9 @@
 package Entity;
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -11,6 +14,9 @@ import java.util.List;
 @Entity
 @Table(name="Utilisateurs")
 @Inheritance(strategy = InheritanceType.JOINED)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +35,7 @@ public class Utilisateur {
 
     @NotNull
     @Email
+    @Column(unique = true)
     private String email;
 
     @NotNull
@@ -44,11 +51,15 @@ public class Utilisateur {
     private String photo;
 
     @NotNull
+    @Column(unique = true)
     private String login;
 
     private String role;
-
     @OneToOne(mappedBy = "utilisateur")
+    private Joueur joueur;
+
+    @OneToOne
+    @JoinColumn(name = "adresse_id")
     private Adresse adresse;
 
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)

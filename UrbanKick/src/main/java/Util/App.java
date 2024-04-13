@@ -1,3 +1,6 @@
+package Util;
+
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -6,8 +9,13 @@ public class App {
     private static SessionFactory sessionFactory;
 
     public static void init() {
-        if (sessionFactory == null) {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+        try {
+            if (sessionFactory == null) {
+                sessionFactory = new Configuration().configure().buildSessionFactory();
+            }
+        } catch (HibernateException e) {
+            System.out.println("Error creating SessionFactory");
+            e.printStackTrace();
         }
     }
 

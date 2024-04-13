@@ -11,10 +11,29 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
-        <mapping class="Entity.Utilisateur"/>
-        <mapping class="Entity.Match"/>
-        <mapping class="Entity.Organisateur"/>
         <mapping class="Entity.Adresse"/>
+        <mapping class="Entity.Utilisateur"/>
+        <mapping class="Entity.Organisateur"/>
+        <mapping class="Entity.Joueur"/>
+        <mapping class="Entity.Equipe"/>
+        <mapping class="Entity.Stade"/>
+        <mapping class="Entity.Ligue"/>
+        <mapping class="Entity.Tour"/>
+        <mapping class="Entity.Match"/>
+        <mapping class="Entity.Penalty"/>
+        <mapping class="Entity.Composition"/>
+        <mapping class="Entity.StatsMatch"/>
+        <mapping class="Entity.StatJoueur"/>
+        <mapping class="Entity.FaitdeMatch"/>
+        <mapping class="Entity.Pronostic"/>
+        <mapping class="Entity.Vote"/>
+        <mapping class="Entity.Jaime"/>
+        <mapping class="Entity.Commentaire"/>
+        <mapping class="Entity.Reponse"/>
+        <mapping class="Entity.Condition"/>
+        <mapping class="Entity.RègleDiscip"/>
+        <mapping class="Entity.RègleClassement"/>
+        <mapping class="Entity.Classement"/>
         <!-- Add other class mappings here -->
     </session-factory>
 </hibernate-configuration>

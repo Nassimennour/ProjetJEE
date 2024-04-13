@@ -1,9 +1,17 @@
 package Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name="Votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"match_id", "utilisateur_id"})})
+@Table(name="Votes",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"match_id", "utilisateur_id"})})
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

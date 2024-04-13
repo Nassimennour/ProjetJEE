@@ -5,7 +5,7 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <listener>
-    <listener-class>AppInitializer</listener-class>
+    <listener-class>Util.AppInitializer</listener-class>
   </listener>
 
 

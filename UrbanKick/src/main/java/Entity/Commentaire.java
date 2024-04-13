@@ -1,11 +1,18 @@
 package Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
 @Table(name="Commentaires")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Commentaire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

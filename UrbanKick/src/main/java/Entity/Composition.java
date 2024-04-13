@@ -1,5 +1,9 @@
 package Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -7,6 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name="Compositions")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Composition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
