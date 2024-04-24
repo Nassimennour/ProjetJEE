@@ -36,14 +36,14 @@ public class Equipe {
     private String logo;
     @ManyToOne
     private Ligue ligue;
-    @OneToMany(mappedBy = "equipe")
+    @OneToMany(mappedBy = "equipe", fetch = FetchType.LAZY)
     private List<Joueur> joueurs;
-    @OneToMany(mappedBy = "equipe")
+    @OneToMany(mappedBy = "equipe", fetch = FetchType.LAZY)
     private List<Classement> classements;
-    @OneToMany(mappedBy = "equipeDomicile")
+    @OneToMany(mappedBy = "equipeDomicile", fetch = FetchType.LAZY)
     private List<Match> matchesDomicile;
-    @OneToMany(mappedBy = "equipeExterieur")
+    @OneToMany(mappedBy = "equipeExterieur", fetch = FetchType.LAZY)
     private List<Match> matchesExterieur;
-    @OneToMany(mappedBy = "equipe")
+    @OneToMany(mappedBy = "equipe", fetch = FetchType.LAZY)
     private List<Commentaire> commentaires;
 }

@@ -5,6 +5,7 @@ import Util.App;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class JoueurDaoImpl extends GenericDaoImpl<Joueur> implements JoueurDao {
             return query.list();
         } catch (Exception e) {
             e.printStackTrace();
-            return List.of();
+            return new ArrayList<>();
         }
     }
 

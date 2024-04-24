@@ -32,15 +32,17 @@ public class Ligue {
     private Categorie categorie;
     @OneToOne
     private Equipe vainqueur;
-    @OneToMany(mappedBy = "ligue")
+    @OneToMany(mappedBy = "ligue", fetch = FetchType.LAZY)
     private List<Equipe> equipes;
-    @OneToMany(mappedBy = "ligue")
+    @OneToMany(mappedBy = "ligue", fetch = FetchType.LAZY)
     private List<Match> matches;
     @ManyToOne
     private Organisateur organisateur;
     @Enumerated(EnumType.STRING)
     private FormatLigue format;
-    @OneToOne(mappedBy = "ligue")
+    @OneToMany(mappedBy = "ligue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Tour> tours;
+    @OneToOne(mappedBy = "ligue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private RègleClassement règleClassement;
     private String logo;
     @ManyToOne
@@ -63,7 +65,7 @@ public class Ligue {
         inverseJoinColumns = @JoinColumn(name = "regle_id")
     )
     private List<RègleDiscip> règlesDisciplinaires;
-    @OneToMany(mappedBy = "ligue")
+    @OneToMany(mappedBy = "ligue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Classement> classements;
 
 }

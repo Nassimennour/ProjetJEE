@@ -5,22 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name="Tours")
+@Table(name="adresses")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tour {
+public class Adresse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
-    @JoinColumn(name = "ligue_id")
-    private Ligue ligue;
-    @Enumerated(EnumType.STRING)
-    private TypeTour typeTour;
-    @OneToMany(mappedBy = "tour")
-    private List<Match> matches;
+    private String rue;
+    private String ville;
+    private int codePostal;
+    private String pays;
+    @OneToOne(mappedBy = "adresse")
+    private Utilisateur utilisateur;
 }

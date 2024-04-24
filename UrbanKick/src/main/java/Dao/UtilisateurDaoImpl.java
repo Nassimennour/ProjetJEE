@@ -5,6 +5,8 @@ import Util.App;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class UtilisateurDaoImpl extends GenericDaoImpl<Utilisateur> implements UtilisateurDao{
@@ -46,6 +48,18 @@ public class UtilisateurDaoImpl extends GenericDaoImpl<Utilisateur> implements U
         }catch(Exception e){
             e.printStackTrace();
             return Optional.empty();
+        }
+    }
+
+    @Override
+    public List<Utilisateur> findByRole(String role) {
+        try (Session session = App.getSession()){
+            Query<Utilisateur> query = session.createQuery("from Utilisateur where role = :role", Utilisateur.class);
+            query.setParameter("role", role);
+            return query.getResultList();
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 }
