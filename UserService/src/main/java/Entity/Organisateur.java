@@ -22,4 +22,5 @@ public class Organisateur extends Utilisateur {
     @Pattern(regexp = "^(http[s]?:\\/\\/(www\\.)?)?([\\w-]+\\.)+[\\w-]{2,4}$", message = "Invalid website URL")
     private String website;
 
+
 }

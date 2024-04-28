@@ -9,4 +9,5 @@ public interface GenericDAO<T> {
     void delete(T t);
     Optional<T> findById(long id);
     List<T> findAll();
+    boolean existsById(long id);
 }

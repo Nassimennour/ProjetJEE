@@ -1,97 +1,75 @@
 package Dao;
 
-import Util.HibernateUtil;
+import Util.App;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
-public class GenericDAOImpl<T> implements GenericDAO<T>{
+public class GenericDAOImpl<T> implements GenericDAO<T> {
+
     private Class<T> type;
 
-    public GenericDAOImpl(Class<T> type){
+    public GenericDAOImpl(Class<T> type) {
         this.type = type;
     }
 
-    @Override
-    public void save(T t){
+    protected <R> R doInTransaction(Function<Session, R> command) {
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSession()){
+        R result = null;
+        try (Session session = App.getSession()) {
             transaction = session.beginTransaction();
+            result = command.apply(session);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    public void save(T t) {
+        doInTransaction(session -> {
             session.save(t);
-            transaction.commit();
-        }catch(Exception e){
-            if(transaction != null){
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+            return null;
+        });
     }
 
     @Override
-    public Optional<T> findById(long id){
-        Transaction transaction = null;
-        T t = null;
-        try(Session session = HibernateUtil.getSession()){
-            transaction = session.beginTransaction();
-            t = session.get(type, id);
-            transaction.commit();
-        }catch(Exception e){
-            if(transaction != null){
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(t);
-    }
-
-    @Override
-    public List<T> findAll(){
-        Transaction transaction = null;
-        List<T> t = null;
-        try(Session session = HibernateUtil.getSession()){
-            transaction = session.beginTransaction();
-            t = session.createQuery("from "+type.getName()).list();
-            transaction.commit();
-        }catch(Exception e){
-            if(transaction != null){
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        if(t == null){
-            return new ArrayList<T>();
-        }
-        return t;
-    }
-    @Override
-    public void update(T t){
-        Transaction transaction = null;
-        try(Session session = HibernateUtil.getSession()){
-            transaction = session.beginTransaction();
+    public void update(T t) {
+        doInTransaction(session -> {
             session.update(t);
-            transaction.commit();
-        }catch(Exception e){
-            if(transaction != null){
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+            return null;
+        });
     }
+
     @Override
-    public void delete(T t){
-        Transaction transaction = null;
-        try(Session session = HibernateUtil.getSession()){
-            transaction = session.beginTransaction();
+    public void delete(T t) {
+        doInTransaction(session -> {
             session.delete(t);
-            transaction.commit();
-        }catch(Exception e){
-            if(transaction != null){
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+            return null;
+        });
+    }
+
+    @Override
+    public Optional<T> findById(long id) {
+        return Optional.ofNullable(doInTransaction(session -> session.get(type, id)));
+    }
+
+    @Override
+    public List<T> findAll() {
+        List<T> results = doInTransaction(session -> session.createQuery("from " + type.getName(), type).list());
+        return results != null ? results : Collections.emptyList();
+    }
+
+    @Override
+    public boolean existsById(long id) {
+        return findById(id).isPresent();
     }
 }
